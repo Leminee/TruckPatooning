@@ -1,57 +1,63 @@
 import java.util.LinkedList;
 import java.util.List;
 
-public class Truck implements Monitoring{
+public class Truck  {
     private long truckId;
     private Truck leadTruck;
-    private int speed = 0;
+    private static int speed = 0;
     private Truck truckInFront;
     private Truck truckBehind;
-    private final List<Truck> platoon = new LinkedList<>();
+    private final List <Truck> platoon = new LinkedList<>();
 
     public Truck(long truckId, Truck leadTruck, int speed, Truck truckInFront, Truck truckBehind) {
         this.truckId = truckId;
         this.leadTruck = leadTruck;
-        this.speed = speed;
+        Truck.speed = speed;
         this.truckInFront = truckInFront;
         this.truckBehind = truckBehind;
         platoon.add(new Truck());
     }
 
+    public Truck(long truckId, int speed, Truck truckBehind) {
+        this.truckId = truckId;
+        Truck.speed = speed;
+        this.truckBehind = truckBehind;
+        platoon.add(new Truck());
+    }
+
     public Truck() {
-
     }
 
-    public int accelerate(){
-        if(speed >= 80) {
-            return 80;
+    public static void accelerate(){
+        int accelerationValue = 5;
+        int currentAccelerationValue = 80;
+
+        if(speed >= currentAccelerationValue) {
+            return;
         }
-        speed += 10;
-        return speed;
+        speed += accelerationValue;
     }
 
-    public int brake(){
+    public static void brake(){
+        int brakeValue = 5;
 
         if (speed <= 0) {
-            return 0;
+            return;
         }
-        speed -= 5;
-        return speed;
+
+        speed -= brakeValue;
     }
 
-    public int stop(){
-        return speed = 0;
-
+    public static void stop(){
+        speed = 0;
     }
 
-    public void join(Truck truck) {
+    public void joinPlatoon(Truck truck) {
         platoon.add(truck);
-
     }
 
-    public void leave(Truck truck) {
+    public void leavePlatoon(Truck truck) {
         platoon.remove(truck);
-
     }
 
     public long getTruckId() {
@@ -73,4 +79,10 @@ public class Truck implements Monitoring{
     public Truck getTruckBehind() {
         return truckBehind;
     }
+
+    public List<Truck> getPlatoon() {
+        return platoon;
+    }
+
+
 }
