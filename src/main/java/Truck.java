@@ -1,44 +1,26 @@
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Objects;
 
-public class Truck  {
-    private long truckId;
-    private Truck leadTruck;
-    private static int speed = 0;
-    private Truck truckInFront;
-    private Truck truckBehind;
-    private final List <Truck> platoon = new LinkedList<>();
-
-    public Truck(long truckId, Truck leadTruck, int speed, Truck truckInFront, Truck truckBehind) {
-        this.truckId = truckId;
-        this.leadTruck = leadTruck;
-        Truck.speed = speed;
-        this.truckInFront = truckInFront;
-        this.truckBehind = truckBehind;
-        platoon.add(new Truck());
-    }
-
-    public Truck(long truckId, int speed, Truck truckBehind) {
-        this.truckId = truckId;
-        Truck.speed = speed;
-        this.truckBehind = truckBehind;
-        platoon.add(new Truck());
-    }
+public class Truck {
+    private Long truckId;
+    private Truck leadTruck = null;
+    private Integer speed = 0;
+    private Truck truckInFront = null;
+    private Truck truckBehind = null;
 
     public Truck() {
     }
 
-    public static void accelerate(){
+    public void accelerate() {
         int accelerationValue = 5;
-        int currentAccelerationValue = 80;
+        int maxSpeed = 80;
 
-        if(speed >= currentAccelerationValue) {
+        if (speed >= maxSpeed) {
             return;
         }
         speed += accelerationValue;
     }
 
-    public static void brake(){
+    public  void brake() {
         int brakeValue = 5;
 
         if (speed <= 0) {
@@ -48,16 +30,26 @@ public class Truck  {
         speed -= brakeValue;
     }
 
-    public static void stop(){
+    public void stop() {
         speed = 0;
     }
 
     public void joinPlatoon(Truck truck) {
-        platoon.add(truck);
-    }
+
+          Truck currentTruck = this;
+
+            while (currentTruck.getTruckBehind() != null) {
+                currentTruck = currentTruck.getTruckBehind();
+
+            }
+            currentTruck.setTruckBehind(truck);
+            truck.setTruckInFront(currentTruck);
+        }
+
 
     public void leavePlatoon(Truck truck) {
-        platoon.remove(truck);
+
+
     }
 
     public long getTruckId() {
@@ -79,9 +71,24 @@ public class Truck  {
     public Truck getTruckBehind() {
         return truckBehind;
     }
+    public void setTruckId(long truckId) {
+        this.truckId = truckId;
+    }
 
-    public List<Truck> getPlatoon() {
-        return platoon;
+    public void setLeadTruck(Truck leadTruck) {
+        this.leadTruck = leadTruck;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void setTruckInFront(Truck truckInFront) {
+        this.truckInFront = truckInFront;
+    }
+
+    public void setTruckBehind(Truck truckBehind) {
+        this.truckBehind = truckBehind;
     }
 
 

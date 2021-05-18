@@ -1,62 +1,28 @@
-
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Truck truck = new Truck();
+        truck.setTruckId(0L);
+        Truck truck1 = new Truck();
+        truck1.setTruckId(1L);
+        Truck truck2 = new Truck();
+        truck2.setTruckId(2L);
+        Truck truck3 = new Truck();
+        truck3.setTruckId(3L);
 
-        for (String s : args) {
-            System.out.println(s);
-        }
-
-        Truck truckBehind = new Truck();
-        Truck leadTruck = new Truck(14334L, 60, truckBehind);
-        Truck truckInFront = new Truck();
-        Truck truck = new Truck(24434L, leadTruck, 60, truckInFront, truckBehind);
-
-
-        while (true) {
-
-            String l = sc.nextLine();
-            if (l.equalsIgnoreCase("l")) {
-                truck.leavePlatoon(truck);
-                System.out.println("LKW mit der ID " + truck.getTruckId() + " hat den Zug verlassen");
-                return;
-            }
-
-            String s = sc.nextLine();
-            if (s.equalsIgnoreCase("s")) {
-                Truck.stop();
-                System.out.println("Geschwindigkeit " + truck.getSpeed() + " km/h");
-                System.out.println("LKW hat angehalten");
-                return;
-            }
+        truck.joinPlatoon(truck1);
+        truck1.joinPlatoon(truck2);
+        truck2.joinPlatoon(truck3);
 
 
-            String j = sc.nextLine();
+        System.out.println("ID erster Truck " + truck.getTruckId() + ", ID Nachfolger des ersten Trucks "  + truck.getTruckBehind().getTruckId());
+        System.out.println("ID erster Truck " + truck1.getTruckId() + ", ID Nachfolger des zweiten Trucks "  + truck1.getTruckBehind().getTruckId() + ", ID Vorgänger des zweiten Trucks " + truck1.getTruckInFront().getTruckId());
+        System.out.println("ID erster Truck " + truck2.getTruckId() + ", ID Nachfolger des dritten Truck "  + truck2.getTruckBehind().getTruckId() + ", ID Vorgänger des dritten Trucks " + truck2.getTruckInFront().getTruckId());
 
-            if (j.equalsIgnoreCase("j")) {
-                leadTruck.joinPlatoon(truck);
-            }
 
-            String a = sc.nextLine();
-            if (a.equalsIgnoreCase("a")) {
 
-                if (leadTruck.getSpeed() >= 80) {
-                    System.err.println("Maximale Geschwindigkeit von " + leadTruck.getSpeed() + " erreicht!");
-                }
-                Truck.accelerate();
-                System.out.println("Geschwindigkeit " + truck.getSpeed() + " km/h");
-            }
 
-            String b = sc.nextLine();
 
-            if (b.equalsIgnoreCase("b")) {
-                Truck.brake();
-                System.out.println("Geschwindigkeit " + truck.getSpeed() + " km/h");
-            }
-        }
     }
 }
