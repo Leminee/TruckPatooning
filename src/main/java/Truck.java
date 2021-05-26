@@ -2,10 +2,10 @@ import java.util.Objects;
 
 public class Truck {
     private Long truckId;
-    private Truck leadTruck = null;
+    private Truck leadTruck;
     private Integer speed = 0;
-    private Truck truckInFront = null;
-    private Truck truckBehind = null;
+    private Truck truckInFront;
+    private Truck truckBehind;
 
     public Truck() {
     }
