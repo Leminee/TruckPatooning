@@ -9,7 +9,7 @@ import java.util.List;
 @RestController
 public class TruckController {
 
-    @GetMapping("/infos")
+    @GetMapping("/")
     public List<Truck> getTruckInfo(List <Truck> truck) {
         truck = new ArrayList<>();
 
