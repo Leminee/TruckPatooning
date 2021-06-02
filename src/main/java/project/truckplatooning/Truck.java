@@ -2,12 +2,12 @@ package project.truckplatooning;
 
 public class Truck {
     private Long truckId;
-    private Truck leadTruck;
     private Integer speed = 0;
     private Truck truckInFront;
     private Truck truckBehind;
 
     public Truck() {
+
     }
 
     public void accelerate() {
@@ -40,7 +40,6 @@ public class Truck {
 
         while (currentTruck.getTruckBehind() != null) {
             currentTruck = currentTruck.getTruckBehind();
-
         }
         currentTruck.setTruckBehind(truck);
         truck.setTruckInFront(currentTruck);
@@ -49,15 +48,10 @@ public class Truck {
 
     public void leavePlatoon(Truck truck) {
 
-
     }
 
     public long getTruckId() {
         return truckId;
-    }
-
-    public Truck getLeadTruck() {
-        return leadTruck;
     }
 
     public int getSpeed() {
@@ -75,9 +69,6 @@ public class Truck {
         this.truckId = truckId;
     }
 
-    public void setLeadTruck(Truck leadTruck) {
-        this.leadTruck = leadTruck;
-    }
 
     public void setSpeed(int speed) {
         this.speed = speed;
