@@ -14,7 +14,7 @@ public class TruckController {
     @GetMapping("/")
     public String getPlatoon(Model model){
 
-        final List<Truck> platoon =  new LinkedList<>();
+        List<Truck> platoon =  new LinkedList<>();
 
         Truck truck = new Truck();
         Truck truck1 = new Truck();
@@ -22,28 +22,29 @@ public class TruckController {
         Truck truck3 = new Truck();
 
         truck.setTruckId(1);
-        truck.setTruckInFront(truck);
+        truck.setTruckInFront(Platoon.leadTruck);
         truck.setTruckBehind(truck1);
-        truck.setSpeed(60);
-        model.addAttribute(truck);
-
+        truck.setSpeed(Platoon.speed);
 
         truck1.setTruckId(2);
         truck1.setTruckInFront(truck);
         truck1.setTruckBehind(truck2);
-        truck1.setSpeed(60);
-        model.addAttribute(truck1);
+        truck1.setSpeed(Platoon.speed);
+
 
         truck2.setTruckId(3);
         truck2.setTruckInFront(truck1);
         truck.setTruckBehind(truck3);
-        truck2.setSpeed(60);
-        model.addAttribute(truck2);
+        truck2.setSpeed(Platoon.speed);
 
         truck3.setTruckId(4);
         truck3.setTruckInFront(truck1);
         truck3.setTruckBehind(truck3);
-        truck3.setSpeed(60);
+        truck3.setSpeed(Platoon.speed);
+
+        model.addAttribute(truck);
+        model.addAttribute(truck1);
+        model.addAttribute(truck2);
         model.addAttribute(truck3);
 
         platoon.add(truck);
@@ -51,11 +52,10 @@ public class TruckController {
         platoon.add(truck2);
         platoon.add(truck3);
 
-        model.addAttribute(platoon);
+        model.addAllAttributes(platoon);
 
 
         return "monitoring";
-
 
     }
 }

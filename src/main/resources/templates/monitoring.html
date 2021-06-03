@@ -6,14 +6,47 @@
 
 <head>
 
-    <title>Monitoring</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Truck Platooning</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 
     <style>
 
-    margin: 2;
-    padding:2;
+    body {
+    margin: 1;
+    padding: 1;
+    background-color: #bcc0c4;
+
+    }
+
+    button {
+    font-size: 20px;
+    border-radius: 5px;
+    }
+
+    fieldset {
+    margin-right: 70%;
+    text-align:center;
+
+    }
+
+    #stop-method-called{
+    text-align:center;
+
+    }
+
+    #monitoring {
+    text-align:center;
+    }
+
+   table, th, td {
+   border: 1px solid black;
+   margin-top: 10px;
+
+
+}
+
+
 
     </style>
 
@@ -24,50 +57,110 @@
 
 
 <header>
-<h1>Platoon</h1>
 
-<p th:text="''" />
+    <p th:text="''"/>
 
 </header>
 
 <main>
 
-<div>
+    <div>
+
+        <tbody>
+        <tr th:each="truck: ${platoon}">
+            <td th:text="${truck.truckId}"/>
+            <td th:text="${truck.truckInFront}"/>
+            <td th:text="${truck.truckBehind}"/>
+            <td th:text="${truck.Platoon.speed}"/>
+        </tr>
+        </tbody>
+
+    </div>
+
+    <fieldset>
+    <div class="start">
+        <legend><h2>Fahrer</h2></legend>
+
+        <button>starte Programm</button>
+
+        <button>beende Programm</button>
+
+    </div>
+
+    </fieldset>
+
+    <fieldset>
+    <div class="lead">
+        <legend><h2>Führungsfahrzeug</h2></legend>
+
+        <button>beschleunige</button>
+
+        <button>bremse</button>
+
+        <button>halte an</button>
+
+    </div>
+    </fieldset>
 
 
-</div>
+    <fieldset>
+    <div class="trucks">
+
+        <legend><h2>LKW</h2></legend>
+
+        <button>joine Platoon</button>
+        <button> verlasse Platoon</button>
 
 
+    </div>
 
-<div class ="lead">
-<h2>Führungsfahrzeug</h2>
+        <table style="width:100%">
+            <tr>
+                <th>truckId</th>
+                <th>truckInFront</th>
+                <th>truckBehind</th>
+                <th>speed</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>truck13</td>
+                <td>truck4343</td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>truck2</td>
+                <td>truck3443</td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>truck3</td>
+                <td>truck3443</td>
+                <td>75</td>
+            </tr>
+        </table>
+    </fieldset>
 
-    <button>beschleunigen</button>
-
-    <button>bremsen</button>
-
-    <button>anhalten</button>
-
-</div>
-
-
-
-<div class ="trucks">
-
-<h2>LKWs im Platoon</h2>
-
-    <button> platoon verlassen </button>
-    <button>platoon joinen</button>
-
-</div>
+    <h2>--> Programm starten</h2>
+    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 </marquee>
+    <h2>--> joinPlatoon()</h2>
+    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> 🚛  platoonJoined</marquee>
+    <h2>--> joinPlatoon()</h2>
+    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> 🚛 <---> 🚛 platoonJoined</marquee>
+    <h2>--> leavePlatoon()</h2>
+    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> <i>NULL</i> <---> 🚛  platoonLeaved</marquee>
+    <h2>--> accelerate()</h2>
+    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> 🚛  speedIncreased</marquee>
+    <h2>--> brake()</h2>
+    <marquee behavior="scroll" direction="left" scrollamount="3"> 🚚 <---> 🚛 speedReduced</marquee>
+    <h2>--> stop()</h2>
+    <p id="stop-method-called"> 🚚 🚛  stopped</p>
 
 </main>
 
 
-
 <footer>
-
-
 </footer>
 
 

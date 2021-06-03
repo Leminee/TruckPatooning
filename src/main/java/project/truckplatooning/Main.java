@@ -1,5 +1,6 @@
 package project.truckplatooning;
 
+
 public class Main {
 
     public static void main(String[] args) {
@@ -21,7 +22,6 @@ public class Main {
         System.out.println("ID erster Truck " + truck.getTruckId() + ", ID Nachfolger des ersten Trucks "  + truck.getTruckBehind().getTruckId());
         System.out.println("ID erster Truck " + truck1.getTruckId() + ", ID Nachfolger des zweiten Trucks "  + truck1.getTruckBehind().getTruckId() + ", ID Vorgänger des zweiten Trucks " + truck1.getTruckInFront().getTruckId());
         System.out.println("ID erster Truck " + truck2.getTruckId() + ", ID Nachfolger des dritten Truck "  + truck2.getTruckBehind().getTruckId() + ", ID Vorgänger des dritten Trucks " + truck2.getTruckInFront().getTruckId());
-
 
 
     }

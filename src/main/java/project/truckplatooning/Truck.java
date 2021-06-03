@@ -2,37 +2,9 @@ package project.truckplatooning;
 
 public class Truck {
     private Long truckId;
-    private Integer speed = 0;
+    private Integer speed = Platoon.speed;
     private Truck truckInFront;
     private Truck truckBehind;
-
-    public Truck() {
-
-    }
-
-    public void accelerate() {
-        int accelerationValue = 5;
-        int maxSpeed = 80;
-
-        if (speed >= maxSpeed) {
-            return;
-        }
-        speed += accelerationValue;
-    }
-
-    public  void brake() {
-        int brakeValue = 5;
-
-        if (speed <= 0) {
-            return;
-        }
-
-        speed -= brakeValue;
-    }
-
-    public void stop() {
-        speed = 0;
-    }
 
     public void joinPlatoon(Truck truck) {
 
@@ -69,7 +41,6 @@ public class Truck {
         this.truckId = truckId;
     }
 
-
     public void setSpeed(int speed) {
         this.speed = speed;
     }
@@ -92,6 +63,4 @@ public class Truck {
                 ", truckBehind=" + truckBehind +
                 '}';
     }
-
-
 }
