@@ -6,13 +6,13 @@ public class Main {
     public static void main(String[] args) {
 
         Truck truck = new Truck();
-        truck.setTruckId(0L);
+        truck.setTruckId(0);
         Truck truck1 = new Truck();
-        truck1.setTruckId(1L);
+        truck1.setTruckId(1);
         Truck truck2 = new Truck();
-        truck2.setTruckId(2L);
+        truck2.setTruckId(2);
         Truck truck3 = new Truck();
-        truck3.setTruckId(3L);
+        truck3.setTruckId(3);
 
         truck.joinPlatoon(truck1);
         truck1.joinPlatoon(truck2);

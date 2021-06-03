@@ -1,9 +1,12 @@
 package project.truckplatooning;
 
+import java.util.Random;
+
 public class Platoon {
 
     public static Truck leadTruck = null;
-    public static int speed = 0;
+
+    public static Integer speed = 70;
 
 
     public void accelerate() {
@@ -30,7 +33,4 @@ public class Platoon {
         speed = 0;
     }
 
-    public Platoon(Truck leadTruck) {
-        this.leadTruck = leadTruck;
-    }
 }

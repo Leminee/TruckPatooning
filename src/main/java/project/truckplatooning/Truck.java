@@ -1,7 +1,9 @@
 package project.truckplatooning;
 
 public class Truck {
-    private Long truckId;
+    private Integer truckId;
+
+
     private Integer speed = Platoon.speed;
     private Truck truckInFront;
     private Truck truckBehind;
@@ -37,9 +39,6 @@ public class Truck {
     public Truck getTruckBehind() {
         return truckBehind;
     }
-    public void setTruckId(long truckId) {
-        this.truckId = truckId;
-    }
 
     public void setSpeed(int speed) {
         this.speed = speed;
@@ -48,19 +47,12 @@ public class Truck {
     public void setTruckInFront(Truck truckInFront) {
         this.truckInFront = truckInFront;
     }
+    public void setTruckId(Integer truckId) {
+        this.truckId = truckId;
+    }
 
     public void setTruckBehind(Truck truckBehind) {
         this.truckBehind = truckBehind;
     }
 
-
-    @Override
-    public String toString() {
-        return "Truck{" +
-                "truckId=" + truckId +
-                ", speed=" + speed +
-                ", truckInFront=" + truckInFront +
-                ", truckBehind=" + truckBehind +
-                '}';
-    }
 }
