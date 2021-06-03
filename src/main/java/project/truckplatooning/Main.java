@@ -23,5 +23,6 @@ public class Main {
         System.out.println("ID erster Truck " + truck2.getTruckId() + ", ID Nachfolger des dritten Truck "  + truck2.getTruckBehind().getTruckId() + ", ID Vorgänger des dritten Trucks " + truck2.getTruckInFront().getTruckId());
 
 
+
     }
 }

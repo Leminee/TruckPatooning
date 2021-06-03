@@ -83,4 +83,15 @@ public class Truck {
     }
 
 
+    @Override
+    public String toString() {
+        return "Truck{" +
+                "truckId=" + truckId +
+                ", speed=" + speed +
+                ", truckInFront=" + truckInFront +
+                ", truckBehind=" + truckBehind +
+                '}';
+    }
+
+
 }
