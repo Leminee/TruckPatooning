@@ -106,23 +106,33 @@
     <button id="refresh-button" onClick="window.location.reload();">Status aktualisieren</button>
 
         <table style="width:65%">
+            <thead>
             <tr>
                 <th>truckId</th>
+                <th>truckProcessId</th>
+                <th>leadTruck</th>
                 <th>truckInFront</th>
                 <th>truckBehind</th>
                 <th>speed</th>
             </tr>
-            <tr th:each="truck: ${truck}">
+            </thead>
+
+            <tbody>
+
+            <tr th:each="truck:${truck}">
                 <td th:text="${truck.truckId}"></td>
+                <td th:text="${truck.truckProcessId}"></td>
+                <td th:text="${truck.leadTruck}"></td>
                 <td th:text="${truck.truckInFront}"></td>
                 <td th:text="${truck.truckBehind}"></td>
                 <td th:text="${truck.speed}"></td>
             </tr>
+            </tbody>
 
         </table>
 
 
-    <h3>--> Programm starten</h3>
+    <h3>--> start program</h3>
     <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 </marquee>
     <h3>--> joinPlatoon()</h3>
     <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> 🚛  (platoonJoined)</marquee>

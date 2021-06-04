@@ -1,13 +1,10 @@
 package project.truckplatooning;
 
-import java.util.Random;
 
 public class Platoon {
 
     public static Truck leadTruck = null;
-
     public static Integer speed = 70;
-
 
     public void accelerate() {
         int accelerationValue = 5;
@@ -27,6 +24,10 @@ public class Platoon {
         }
 
         speed -= brakeValue;
+    }
+
+    public void leavePlatoon(Truck truck) {
+
     }
 
     public void stop() {
