@@ -1,14 +1,19 @@
 package project.truckplatooning;
 
 
+import java.util.Random;
+
 public class Platoon {
 
     public static Truck leadTruck = null;
-    public static Integer speed = 70;
+    public static Integer speed = 65;
 
     public void accelerate() {
-        int accelerationValue = 5;
+        Random random = new Random();
+
+        int accelerationValue = random.nextInt(8);
         int maxSpeed = 80;
+
 
         if (speed >= maxSpeed) {
             return;
@@ -17,13 +22,18 @@ public class Platoon {
     }
 
     public  void brake() {
-        int brakeValue = 5;
+        Random random = new Random();
+        int brakeValue = random.nextInt(8);
 
         if (speed <= 0) {
             return;
         }
 
         speed -= brakeValue;
+    }
+
+    public void steer() {
+
     }
 
     public void leavePlatoon(Truck truck) {

@@ -34,12 +34,10 @@ public class TruckController {
         truck1.setSpeed(truck1.getSpeed() + random.nextInt(3));
         truck1.joinPlatoon(truck2);
 
-
         truck2.setTruckId(3788788332L);
         truck1.setLeadTruck(truck);
         truck2.setSpeed(truck2.getSpeed() + random.nextInt(3));
         truck2.joinPlatoon(truck3);
-
 
         truck3.setTruckId(4678873223L);
         truck1.setLeadTruck(truck);

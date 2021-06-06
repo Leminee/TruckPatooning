@@ -3,12 +3,12 @@ package project.truckplatooning;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Truck {
-
     private static final AtomicInteger pIdCounter = new AtomicInteger(0);
     private Truck leadTruck = Platoon.leadTruck;
     private int truckProcessId;
     private Long truckId;
     private Integer speed = Platoon.speed;
+    private String distance = "15 m";
     private Truck truckInFront;
     private Truck truckBehind;
 
@@ -23,8 +23,13 @@ public class Truck {
         this.truckBehind = truckBehind;
     }
 
+    public void createTruck() {
+
+    }
 
     public void joinPlatoon(Truck truck) {
+
+        createTruck();
 
         Truck currentTruck = this;
 
@@ -52,14 +57,15 @@ public class Truck {
     public Integer getSpeed() {
         return speed;
     }
-
     public Truck getLeadTruck() {
         return leadTruck;
     }
     public int getTruckProcessId() {
         return truckProcessId;
     }
-
+    public String getDistance() {
+        return distance;
+    }
     public void setLeadTruck(Truck leadTruck) {
         this.leadTruck = leadTruck;
     }
@@ -72,7 +78,6 @@ public class Truck {
     public void setTruckId(Long truckId) {
         this.truckId = truckId;
     }
-
     public void setTruckBehind(Truck truckBehind) {
         this.truckBehind = truckBehind;
     }
