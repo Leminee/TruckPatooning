@@ -1,16 +1,18 @@
 package project.truckplatooning;
 
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Truck {
     private static final AtomicInteger pIdCounter = new AtomicInteger(0);
     private Truck leadTruck = Platoon.leadTruck;
-    private int truckProcessId;
+    private Integer truckProcessId;
     private Long truckId;
     private Integer speed = Platoon.speed;
-    private String distance = "15 m";
+    private Integer distanceBetweenTrucks = 15;
     private Truck truckInFront;
     private Truck truckBehind;
+
 
     public Truck(){
       truckProcessId = pIdCounter.incrementAndGet();
@@ -23,7 +25,7 @@ public class Truck {
         this.truckBehind = truckBehind;
     }
 
-    public void createTruck() {
+    public static void createTruck() {
 
     }
 
@@ -33,19 +35,18 @@ public class Truck {
 
         Truck currentTruck = this;
 
-        while (currentTruck.getTruckBehind() != null) {
-            currentTruck = currentTruck.getTruckBehind();
+        while (currentTruck.truckBehind != null) {
+            currentTruck = currentTruck.truckBehind;
         }
         currentTruck.setTruckBehind(truck);
         truck.setTruckInFront(currentTruck);
     }
 
-
     public void leavePlatoon(Truck truck) {
 
     }
 
-    public long getTruckId() {
+    public Long getTruckId() {
         return truckId;
     }
     public Truck getTruckInFront() {
@@ -57,18 +58,17 @@ public class Truck {
     public Integer getSpeed() {
         return speed;
     }
-    public Truck getLeadTruck() {
-        return leadTruck;
+    public Long getLeadTruck(){
+        return leadTruck.truckId;
     }
-    public int getTruckProcessId() {
+    public Integer getTruckProcessId() {
         return truckProcessId;
     }
-    public String getDistance() {
-        return distance;
+    public Integer getDistanceBetweenTrucks() {
+        return distanceBetweenTrucks;
     }
     public void setLeadTruck(Truck leadTruck) {
-        this.leadTruck = leadTruck;
-    }
+        this.leadTruck = leadTruck; }
     public void setSpeed(int speed) {
         this.speed = speed;
     }
@@ -81,5 +81,13 @@ public class Truck {
     public void setTruckBehind(Truck truckBehind) {
         this.truckBehind = truckBehind;
     }
-
+    public void setTruckProcessId(Integer truckProcessId) {
+        this.truckProcessId = truckProcessId;
+    }
+    public void setSpeed(Integer speed) {
+        this.speed = speed;
+    }
+    public void setDistanceBetweenTrucks(Integer distanceBetweenTrucks) {
+        this.distanceBetweenTrucks = distanceBetweenTrucks;
+    }
 }

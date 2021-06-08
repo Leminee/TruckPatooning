@@ -18,10 +18,14 @@ public class TruckService {
 
         // v = 33 Meter / 20 => v = 1,25 m/s => v = (int) 4.5 km/s
 
+        //TODO
 
-
+        
     }
 
     public void adjustSpeed(){
+
+        //TODO
+
     }
 }

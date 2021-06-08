@@ -9,8 +9,6 @@
     <title>Truck Platooning</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-
-
     <style>
 
     body {
@@ -116,6 +114,7 @@
                 <th>leadTruck</th>
                 <th>truckInFront</th>
                 <th>truckBehind</th>
+                <th>distanceBetweenTrucks</th>
                 <th>speed</th>
             </tr>
             </thead>
@@ -128,13 +127,14 @@
                 <td id="lead-truck" th:text="${truck.leadTruck}"></td>
                 <td th:text="${truck.truckInFront}"></td>
                 <td th:text="${truck.truckBehind}"></td>
+                <td th:text="${truck.distanceBetweenTrucks}"></td>
                 <td th:text="${truck.speed}"></td>
             </tr>
             </tbody>
 
          </table>
 
-    <h3>--> start program</h3>
+    <h3>--> onStart()</h3>
     <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 </marquee>
     <h3>--> joinPlatoon()</h3>
     <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> 🚛  (platoonJoined)</marquee>

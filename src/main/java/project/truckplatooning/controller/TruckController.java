@@ -15,6 +15,7 @@ public class TruckController {
 
     @GetMapping("/monitor")
     public String monitor(Model model){
+
         Random random = new Random();
 
         Truck truck = new Truck();
@@ -23,25 +24,25 @@ public class TruckController {
         Truck truck2 = new Truck();
         Truck truck3 = new Truck();
 
-
-        truck.setTruckId(76886078887L);
+        truck.setTruckId(7688607L);
         truck.setLeadTruck(truck);
-        truck.setSpeed(truck.getSpeed() + random.nextInt(10));
+        truck.setSpeed(truck.getSpeed() + random.nextInt(3));
         truck.joinPlatoon(truck1);
 
-        truck1.setTruckId(67867876533L);
+
+        truck1.setTruckId(6786787L);
         truck1.setLeadTruck(truck);
-        truck1.setSpeed(truck1.getSpeed() + random.nextInt(3));
+        truck1.setSpeed(truck1.getSpeed() + random.nextInt(2));
         truck1.joinPlatoon(truck2);
 
-        truck2.setTruckId(3788788332L);
-        truck1.setLeadTruck(truck);
-        truck2.setSpeed(truck2.getSpeed() + random.nextInt(3));
+        truck2.setTruckId(3788788788L);
+        truck2.setLeadTruck(truck);
+        truck2.setSpeed(truck2.getSpeed() + random.nextInt(2));
         truck2.joinPlatoon(truck3);
 
-        truck3.setTruckId(4678873223L);
-        truck1.setLeadTruck(truck);
-        truck3.setSpeed(truck3.getSpeed() + random.nextInt(3));
+        truck3.setTruckId(4678L);
+        truck3.setLeadTruck(truck);
+        truck3.setSpeed(truck3.getSpeed() + random.nextInt(2));
 
         model.addAttribute("truck", Arrays.asList(truck, truck1,truck2,truck3));
 

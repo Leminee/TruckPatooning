@@ -26,9 +26,6 @@ public class MainTest {
         System.out.println("ID Truck " + truck2.getTruckId() + ", ID Nachfolger des dritten Truck "  + truck2.getTruckBehind().getTruckId() + ", ID Vorgänger des dritten Trucks " + truck2.getTruckInFront().getTruckId());
 
 
-        UUID uuid = new UUID(103344334, 1244443333);
-        System.out.println(uuid);
-
 
     }
 }
