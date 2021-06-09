@@ -72,9 +72,9 @@
     <div class="start">
         <legend><h2>Fahrer</h2></legend>
 
-        <button>Programm starten</button>
+        <button >Programm starten</button>
 
-        <button>Programm beenden</button>
+        <button onclick="location.href = 'http://localhost:8080/end'">Programm beenden</button>
 
     </div>
 
@@ -84,10 +84,9 @@
     <div class="lead">
         <legend><h2>Führungsfahrzeug</h2></legend>
 
-        <button>Beschleunigen</button>
-        <button>Lenken</button>
-        <button>Bremsen</button>
-        <button>Anhalten</button>
+        <button onclick="location.href = 'http://localhost:8080/speedplus'">Beschleunigen</button>
+        <button onclick="location.href = 'http://localhost:8080/speedminus'">Bremsen</button>
+        <button onclick="location.href = 'http://localhost:8080/stop'">Anhalten</button>
 
     </div>
     </fieldset>
@@ -98,13 +97,13 @@
 
         <legend><h2>LKW</h2></legend>
 
-        <button>Sich dem Platoon anschließen</button>
+        <button onclick="location.href = 'http://localhost:8080/join'">Sich dem Platoon anschließen</button>
         <button>Platoon verlassen</button>
 
 
     </div>
     </fieldset>
-    <button id="refresh-button" onClick="window.location.reload();">Status aktualisieren</button>
+    <!--<button id="refresh-button" onClick="window.location.reload();">Status aktualisieren</button>-->
 
         <table style="width:65%">
             <thead>
@@ -114,8 +113,8 @@
                 <th>leadTruck</th>
                 <th>truckInFront</th>
                 <th>truckBehind</th>
-                <th>distanceBetweenTrucks</th>
                 <th>speed</th>
+                <th>distanceBetweenTrucks</th>
             </tr>
             </thead>
 
@@ -127,26 +126,26 @@
                 <td id="lead-truck" th:text="${truck.leadTruck}"></td>
                 <td th:text="${truck.truckInFront}"></td>
                 <td th:text="${truck.truckBehind}"></td>
-                <td th:text="${truck.distanceBetweenTrucks}"></td>
                 <td th:text="${truck.speed}"></td>
+                <td th:text="${truck.distanceBetweenTrucks}"></td>
+
             </tr>
             </tbody>
 
          </table>
 
     <h3>--> onStart()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 </marquee>
+    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 </marquee>
     <h3>--> joinPlatoon()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> 🚛  (platoonJoined)</marquee>
+    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> 🚛  (platoonJoined)</marquee>
     <h3>--> joinPlatoon()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> 🚛 <---> 🚛 (platoonJoined)</marquee>
+    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> 🚛 <---> 🚛 (platoonJoined)</marquee>
     <h3>--> leavePlatoon()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> <i>EMPTY</i> <---> 🚛 (platoonLeaved -> GapArose)</marquee>
+    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> <i>EMPTY</i> <---> 🚛 (platoonLeaved -> GapArose)</marquee>
     <h3>--> closeGap() -> accelerate()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="4"> 🚚 <---> 🚛 (speedIncreased -> GapClosed) --------
-    Die LKWs, die sich hinter dem LKW, der den Platoon verlassen hat, befinden, sollen ihre Geschwindigkeit um 4 Km/h für 20 Sekunden erhöhen </marquee>
+    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> 🚛 (speedIncreased -> GapClosed) </marquee>
     <h3>--> brake() -> adjustSpeed()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="3"> 🚚 <---> 🚛 speedReduced</marquee>
+    <marquee behavior="scroll" direction="left" scrollamount="1"> 🚚 <---> 🚛 speedReduced</marquee>
     <h3>--> stop()</h3>
     <p id="stop-method-called"> 🚚 🚛  stopped</p>
 

@@ -1,9 +1,10 @@
 package project.truckplatooning;
 
-
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Truck {
+
     private static final AtomicInteger pIdCounter = new AtomicInteger(0);
     private Truck leadTruck = Platoon.leadTruck;
     private Integer truckProcessId;
@@ -25,13 +26,13 @@ public class Truck {
         this.truckBehind = truckBehind;
     }
 
-    public static void createTruck() {
+    public void createTruck(Truck truck) {
 
     }
 
     public void joinPlatoon(Truck truck) {
 
-        createTruck();
+        createTruck(truck);
 
         Truck currentTruck = this;
 
@@ -44,6 +45,33 @@ public class Truck {
 
     public void leavePlatoon(Truck truck) {
 
+    }
+
+    public void accelerate() {
+
+        int accelerationValue = 3;
+        int maxSpeed = 80;
+
+        if (speed >= maxSpeed) {
+            return;
+        }
+
+        Platoon.speed = speed += accelerationValue;
+    }
+
+    public  void brake() {
+
+        int brakeValue = 3;
+
+        if (speed <= 3) {
+            return;
+        }
+
+        Platoon.speed = speed -= brakeValue;
+    }
+
+    public void stop() {
+        Platoon.speed = 0;
     }
 
     public Long getTruckId() {

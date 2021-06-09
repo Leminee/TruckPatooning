@@ -1,11 +1,13 @@
 package project.truckplatooning;
 
+import java.util.Scanner;
 
-import java.util.UUID;
 
 public class MainTest {
 
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
 
         Truck truck = new Truck();
         truck.setTruckId(0L);
@@ -16,16 +18,51 @@ public class MainTest {
         Truck truck3 = new Truck();
         truck3.setTruckId(3L);
 
-        truck.joinPlatoon(truck1);
-        truck1.joinPlatoon(truck2);
-        truck2.joinPlatoon(truck3);
+        System.out.println("Aktuelle Geschwindigkeit: " + truck.getSpeed());
 
+        while (true){
 
-        System.out.println("ID Truck " + truck.getTruckId() + ", ID Nachfolger des ersten Trucks "  + truck.getTruckBehind().getTruckId());
-        System.out.println("ID Truck " + truck1.getTruckId() + ", ID Nachfolger des zweiten Trucks "  + truck1.getTruckBehind().getTruckId() + ", ID Vorgänger des zweiten Trucks " + truck1.getTruckInFront().getTruckId());
-        System.out.println("ID Truck " + truck2.getTruckId() + ", ID Nachfolger des dritten Truck "  + truck2.getTruckBehind().getTruckId() + ", ID Vorgänger des dritten Trucks " + truck2.getTruckInFront().getTruckId());
+            String input = sc.nextLine();
 
+            if (input.length() != 1) {
+                System.err.println("Error");
+            }
 
+            //j für joinen
+            if (input.equalsIgnoreCase("j")) {
+                truck.joinPlatoon(truck1);
+                System.out.println("Hat sich dem Platoon angeschlossen");
+            }
 
+            // l für leave
+            if(input.equalsIgnoreCase("l")) {
+                truck.leavePlatoon(truck);
+                System.out.println("Hat den Platoon verlassen");
+            }
+
+            //a für accelerate
+            if(input.equalsIgnoreCase("a")) {
+                truck.accelerate();
+                System.out.println("Hat Geschwindigkeit erhöht");
+                System.out.println(truck.getSpeed());
+            }
+
+            //b für break
+            if(input.equalsIgnoreCase("b")) {
+                truck.brake();
+                System.out.println("Hat Geschwindigkeit verringert");
+                System.out.println(truck.getSpeed());
+            }
+
+            //s für stop
+            if(input.equalsIgnoreCase("s")) {
+                truck.stop();
+                System.out.println("Geschwindigkeit nach dem Stoppen :" + truck.getSpeed());
+            }
+
+            if(input.equalsIgnoreCase("exit")) {
+                System.exit(0);
+            }
+        }
     }
 }
