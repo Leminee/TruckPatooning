@@ -1,13 +1,11 @@
 package project.truckplatooning;
 
-import java.util.Scanner;
 
-
-public class MainTest {
+public class CLI {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+     /*   Scanner sc = new Scanner(System.in);
 
         Truck truck = new Truck();
         truck.setTruckId(0L);
@@ -63,6 +61,6 @@ public class MainTest {
             if(input.equalsIgnoreCase("exit")) {
                 System.exit(0);
             }
-        }
+        }*/
     }
 }

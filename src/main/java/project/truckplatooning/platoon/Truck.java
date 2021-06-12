@@ -1,6 +1,5 @@
-package project.truckplatooning;
+package project.truckplatooning.platoon;
 
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Truck {
@@ -10,29 +9,21 @@ public class Truck {
     private Integer truckProcessId;
     private Long truckId;
     private Integer speed = Platoon.speed;
-    private Integer distanceBetweenTrucks = 15;
     private Truck truckInFront;
     private Truck truckBehind;
+    private Role role;
 
 
     public Truck(){
       truckProcessId = pIdCounter.incrementAndGet();
     }
 
-    public Truck(Long truckId,Integer speed, Truck truckInFront, Truck truckBehind) {
-        this.truckId = truckId;
-        this.speed = speed;
-        this.truckInFront = truckInFront;
-        this.truckBehind = truckBehind;
-    }
-
-    public void createTruck(Truck truck) {
-
-    }
-
     public void joinPlatoon(Truck truck) {
 
-        createTruck(truck);
+       // createTruck(truck);
+
+
+
 
         Truck currentTruck = this;
 
@@ -47,32 +38,7 @@ public class Truck {
 
     }
 
-    public void accelerate() {
 
-        int accelerationValue = 3;
-        int maxSpeed = 80;
-
-        if (speed >= maxSpeed) {
-            return;
-        }
-
-        Platoon.speed = speed += accelerationValue;
-    }
-
-    public  void brake() {
-
-        int brakeValue = 3;
-
-        if (speed <= 3) {
-            return;
-        }
-
-        Platoon.speed = speed -= brakeValue;
-    }
-
-    public void stop() {
-        Platoon.speed = 0;
-    }
 
     public Long getTruckId() {
         return truckId;
@@ -91,9 +57,6 @@ public class Truck {
     }
     public Integer getTruckProcessId() {
         return truckProcessId;
-    }
-    public Integer getDistanceBetweenTrucks() {
-        return distanceBetweenTrucks;
     }
     public void setLeadTruck(Truck leadTruck) {
         this.leadTruck = leadTruck; }
@@ -115,7 +78,5 @@ public class Truck {
     public void setSpeed(Integer speed) {
         this.speed = speed;
     }
-    public void setDistanceBetweenTrucks(Integer distanceBetweenTrucks) {
-        this.distanceBetweenTrucks = distanceBetweenTrucks;
-    }
+
 }
