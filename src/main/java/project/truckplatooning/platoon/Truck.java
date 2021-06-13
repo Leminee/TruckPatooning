@@ -1,29 +1,49 @@
 package project.truckplatooning.platoon;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Truck {
 
-    private static final AtomicInteger pIdCounter = new AtomicInteger(0);
     private Truck leadTruck = Platoon.leadTruck;
-    private Integer truckProcessId;
+    private static Integer truckProcessId =0;
     private Long truckId;
     private Integer speed = Platoon.speed;
     private Truck truckInFront;
     private Truck truckBehind;
-    private Role role;
+    private TruckRole truckRole;
 
 
     public Truck(){
-      truckProcessId = pIdCounter.incrementAndGet();
+        Truck.truckProcessId++;
+
+    }
+
+    public Truck(TruckRole role){
+        Truck.truckProcessId++;
+
+    }
+
+    public Truck(Truck leadTruck, Integer truckProcessId, Long truckId, Integer speed, TruckRole truckRole) {
+        this.leadTruck = leadTruck;
+        this.truckProcessId = truckProcessId;
+        this.truckId = truckId;
+        this.speed = speed;
+        this.truckRole = truckRole;
+        Truck.truckProcessId = truckProcessId ++;
+    }
+
+
+
+    public Truck(Truck leadTruck, Integer truckProcessId, Long truckId, Integer speed, Truck truckInFront, Truck truckBehind, TruckRole truckRole) {
+        this.leadTruck = leadTruck;
+        this.truckProcessId = truckProcessId;
+        this.truckId = truckId;
+        this.speed = speed;
+        this.truckInFront = truckInFront;
+        this.truckBehind = truckBehind;
+        this.truckRole = truckRole;
+        Truck.truckProcessId = truckProcessId ++;
     }
 
     public void joinPlatoon(Truck truck) {
-
-       // createTruck(truck);
-
-
-
 
         Truck currentTruck = this;
 
@@ -37,8 +57,6 @@ public class Truck {
     public void leavePlatoon(Truck truck) {
 
     }
-
-
 
     public Long getTruckId() {
         return truckId;
@@ -58,6 +76,9 @@ public class Truck {
     public Integer getTruckProcessId() {
         return truckProcessId;
     }
+    public TruckRole getTruckRole() {
+        return truckRole;
+    }
     public void setLeadTruck(Truck leadTruck) {
         this.leadTruck = leadTruck; }
     public void setSpeed(int speed) {
@@ -72,11 +93,17 @@ public class Truck {
     public void setTruckBehind(Truck truckBehind) {
         this.truckBehind = truckBehind;
     }
-    public void setTruckProcessId(Integer truckProcessId) {
-        this.truckProcessId = truckProcessId;
-    }
     public void setSpeed(Integer speed) {
         this.speed = speed;
     }
 
+    public void setTruckRole(TruckRole truckRole) {
+        this.truckRole = truckRole;
+    }
+
+    @Override
+    public String toString() {
+        return "" + truckId;
+
+    }
 }

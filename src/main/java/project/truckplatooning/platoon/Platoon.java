@@ -1,13 +1,15 @@
 package project.truckplatooning.platoon;
 
+
 public class Platoon  {
 
     public static Truck leadTruck = null;
     public static Integer speed = 68;
 
-
     public void onStart() {
 
+        TruckService truckService = new TruckService();
+        truckService.createLead();
 
     }
 

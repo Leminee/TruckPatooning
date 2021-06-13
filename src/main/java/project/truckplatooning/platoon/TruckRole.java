@@ -1,6 +1,6 @@
 package project.truckplatooning.platoon;
 
-public enum Role {
+public enum TruckRole {
     LEAD,
     FOLLOW
 }

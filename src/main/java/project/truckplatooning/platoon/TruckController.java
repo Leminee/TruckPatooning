@@ -4,10 +4,7 @@ package project.truckplatooning.platoon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -18,6 +15,17 @@ public class TruckController {
     @Autowired
     public TruckController(TruckService truckService) {
         this.truckService = truckService;
+    }
+
+
+    @GetMapping("/start")
+    public String start(){
+
+        Platoon platoon = new Platoon();
+        platoon.onStart();
+
+        return "started";
+
     }
 
 
@@ -61,26 +69,9 @@ public class TruckController {
     }
 
 
-    @GetMapping("/start")
-    public String start(Model model){
 
-        showMonitor(model);
-        Platoon platoon = new Platoon();
-        platoon.onStart();
 
-        return showMonitor(model);
-
-    }
-
-    @GetMapping("/end")
-    public void close(){
-
-        Platoon platoon = new Platoon();
-        platoon.onEnd();
-
-    }
-
-    @GetMapping("/join")
+    @PostMapping("/join")
     public String getJoinedTrucks(Model model){
 
         truckService.showMonitor(model);
@@ -88,24 +79,22 @@ public class TruckController {
         return showMonitor(model);
     }
 
-    @GetMapping("/leave")
+    @DeleteMapping("/leave")
     public String getLeavedTrucks(Model model){
-
-        Truck truck = new Truck();
-        truck.leavePlatoon(truck);
 
         showMonitor(model);
 
         return showMonitor(model);
     }
 
-    @PostMapping("/addspeed")
-    public void registerNewTruck(@RequestBody int index) {
-
-        truckService.createTruck(index);
+    @GetMapping("/end")
+    public void close(){
+        
+        System.out.println("Programm wird beendet...");
+        Platoon platoon = new Platoon();
+        platoon.onEnd();
 
     }
-
 
 
 }

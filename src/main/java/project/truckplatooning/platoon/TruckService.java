@@ -4,26 +4,50 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.Arrays;
+import java.util.Random;
+
 @Service
 public class TruckService {
 
-    Platoon platoon = new Platoon();
+    public static void main(String[] args) {
 
-    public void createTruck(int index) {
+        Platoon platoon = new Platoon();
 
+        TruckService truckService = new TruckService();
+        truckService.createLead();
 
     }
 
-    public String showMonitor(Model model) {
+    public void createLead() {
+
+
+        Truck truck = new Truck(Platoon.leadTruck,34345 , 453576567L, Platoon.speed, null, new Truck(), TruckRole.LEAD);
+        Platoon.leadTruck = truck;
+
+    }
+
+    public Truck addNewTruck(){
+
+        Truck truck;
+        Random random = new Random();
+        long truckId = random.nextLong();
+        int pId = random.nextInt();
+
+        return truck = new Truck(Platoon.leadTruck, pId, truckId, Platoon.speed, new Truck(), new Truck(), TruckRole.FOLLOW);
+
+    }
+
+
+    public String showMonitor (Model model){
+
         Platoon platoon = new Platoon();
         platoon.onStart();
 
-
-        Truck truck = new Truck();
+        Truck truck = new Truck(TruckRole.FOLLOW);
         Platoon.leadTruck = truck;
-        Truck truck1 = new Truck();
-        Truck truck2 = new Truck();
-        Truck truck3 = new Truck();
+        Truck truck1 = new Truck(TruckRole.FOLLOW);
+        Truck truck2 = new Truck(TruckRole.FOLLOW);
+        Truck truck3 = new Truck(TruckRole.FOLLOW);
 
 
         truck.setTruckId(7688607L);
@@ -55,12 +79,12 @@ public class TruckService {
     }
 
 
-    public static void updateSpeed(){
+    public static void updateSpeed () {
 
 
     }
 
-    public void closeGap(){
+    public void closeGap () {
 
         // Um die Lücke zu schließen,
         // müssen die Fahrzeuge,
@@ -79,9 +103,7 @@ public class TruckService {
         //TODO
 
     }
-
-
-    public void adjustSpeed(){
+    public void adjustSpeed () {
 
         //TODO
     }
