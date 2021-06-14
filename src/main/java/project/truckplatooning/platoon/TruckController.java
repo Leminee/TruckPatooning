@@ -1,16 +1,25 @@
 package project.truckplatooning.platoon;
 
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import project.truckplatooning.TruckPlatooningApplication;
+
+import java.util.Date;
+import java.util.UUID;
 
 
 @Controller
 public class TruckController {
 
     private final TruckService truckService;
+
+    @Autowired
+    private RabbitTemplate template;
+
 
     @Autowired
     public TruckController(TruckService truckService) {
@@ -68,19 +77,16 @@ public class TruckController {
 
     }
 
-
-
-
-    @PostMapping("/join")
-    public String getJoinedTrucks(Model model){
+    @PostMapping("/join/{truckId}")
+    public String addNewTruck(Model model){
 
         truckService.showMonitor(model);
 
         return showMonitor(model);
     }
 
-    @DeleteMapping("/leave")
-    public String getLeavedTrucks(Model model){
+    @PostMapping("/leave/{truckId}")
+    public String removeTruck(Model model){
 
         showMonitor(model);
 
@@ -96,5 +102,18 @@ public class TruckController {
 
     }
 
+
+
+    @GetMapping("/pub")
+    public String publishMessage(@RequestBody TruckNotificator message) {
+        message.setMessageId(UUID.randomUUID().toString());
+        message.setMessageDate(new Date());
+        template.convertAndSend(TruckPlatooningApplication.EXCHANGE,
+                TruckPlatooningApplication.ROUTING_KEY, message);
+
+        System.out.println("test");
+
+        return "Message Published";
+    }
 
 }

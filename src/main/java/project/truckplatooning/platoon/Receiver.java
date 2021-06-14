@@ -20,19 +20,23 @@ public class Receiver {
 
     public static void main(String[] args) throws IOException, TimeoutException {
 
+        System.out.println("PID: " + ProcessHandle.current().pid());
+
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
+
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
-        String message = "LKW mit der PID 1343 hat den Platoon verlassen";
 
-        channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
-        logger.info("Nachricht gesendet!");
+        channel.basicConsume(QUEUE_NAME, true, (consumerTag, message) -> {
+            String m = new String(message.getBody(), "UTF-8");
+            System.out.println("Nachricht erhalten: " + m);
 
-        channel.close();
-        connection.close();
+        }, consumerTag -> {});
+
+
 
     }
 }

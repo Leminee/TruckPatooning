@@ -3,7 +3,7 @@ package project.truckplatooning.platoon;
 public class Truck {
 
     private Truck leadTruck = Platoon.leadTruck;
-    private static Integer truckProcessId =0;
+    private static Integer truckProcessId = 0;
     private Long truckId;
     private Integer speed = Platoon.speed;
     private Truck truckInFront;

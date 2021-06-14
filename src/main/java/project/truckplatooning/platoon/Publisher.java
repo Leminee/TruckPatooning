@@ -19,8 +19,10 @@ public class Publisher {
 
     public static void main(String[] args) throws IOException, TimeoutException {
 
+        System.out.println("PID: " + ProcessHandle.current().pid());
+
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
@@ -30,8 +32,6 @@ public class Publisher {
         channel.basicPublish("", QUEUE_NAME, null,message.getBytes("UTF-8"));
         logger.info("Nachricht gesendet!");
 
-        channel.close();
-        connection.close();
 
     }
 }
