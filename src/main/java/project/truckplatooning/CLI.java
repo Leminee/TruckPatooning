@@ -1,9 +1,11 @@
 package project.truckplatooning;
 
 
+import java.io.IOException;
+
 public class CLI {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
      /*   Scanner sc = new Scanner(System.in);
 
@@ -62,5 +64,11 @@ public class CLI {
                 System.exit(0);
             }
         }*/
+
+        System.out.println(ProcessHandle.current().pid());
+        System.out.println(System.getProperty("os.name"));
+
+
+
     }
 }
