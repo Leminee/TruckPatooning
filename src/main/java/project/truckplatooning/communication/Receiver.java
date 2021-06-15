@@ -1,4 +1,5 @@
-package project.truckplatooning.platoon;
+package project.truckplatooning.communication;
+
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -10,8 +11,8 @@ import org.springframework.context.annotation.Profile;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-@Profile("send")
-public class Publisher {
+@Profile("receive")
+public class Receiver {
 
     public static Logger logger = LoggerFactory.getLogger(Publisher.class);
 
@@ -25,12 +26,16 @@ public class Publisher {
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
+
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
-        String message = "LKW mit der PID 1343 hat den Platoon verlassen";
 
-        channel.basicPublish("", QUEUE_NAME, null,message.getBytes("UTF-8"));
-        logger.info("Nachricht gesendet!");
+        channel.basicConsume(QUEUE_NAME, true, (consumerTag, message) -> {
+            String m = new String(message.getBody(), "UTF-8");
+            System.out.println("Nachricht erhalten: " + m);
+
+        }, consumerTag -> {});
+
 
 
     }

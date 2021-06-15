@@ -45,8 +45,20 @@
 
    }
 
+   td{
+    text-align: center;
+   }
+
    #lead-truck {
     color: green;
+   }
+
+   #speed {
+    font-size: 30px;
+   }
+
+   #truck-id {
+    font-size: 20px;
    }
 
    footer{
@@ -58,7 +70,7 @@
 
 </head>
 
-<body>
+<body onload="changeSpeedColor()">
 
 <header>
     <p th:text="''"/>
@@ -72,6 +84,7 @@
         <tr>
             <th>truckId</th>
             <th>truckProcessId</th>
+            <th>truckRole</th>
             <th>leadTruck</th>
             <th>truckInFront</th>
             <th>truckBehind</th>
@@ -82,12 +95,13 @@
         <tbody>
 
         <tr th:each="truck:${truck}">
-            <td th:text="${truck.truckId}"></td>
+            <td id="truck-id" th:text="${truck.truckId}"></td>
             <td th:text="${truck.truckProcessId}"></td>
+            <td id="truck-role" th:text="${truck.truckRole}"></td>
             <td id="lead-truck" th:text="${truck.leadTruck}"></td>
-            <td th:text="${truck.truckInFront}"></td>
+            <td id="truck-front"th:text="${truck.truckInFront}"></td>
             <td th:text="${truck.truckBehind}"></td>
-            <td th:text="${truck.speed}"></td>
+            <td id="speed" th:text="${truck.speed}"></td>
 
         </tr>
         </tbody>
@@ -104,7 +118,7 @@
         <div class="start">
             <legend><h2>Driver</h2></legend>
 
-            <button>start program</button>
+            <button onclick="location.href = 'http://localhost:8080/start'">start program</button>
 
             <button onclick="location.href = 'http://localhost:8080/end'">exit program</button>
 
@@ -145,13 +159,38 @@
 
 
 
+
+
 <footer>
     <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> 🚛 <---> 🚛 <---> 🚛 </marquee>
 </footer>
 
+
+
+<script type="text/javascript">
+
+   changeSpeedColor = function() {
+
+  if (document.getElementById('truck-role').innerHTML == 'LEAD') {
+  document.getElementById('truck-role').style.color = 'green';
+  }
+
+  if (document.getElementById('truck-id').innerHTML  == 66666666) {
+  document.getElementById('truck-id').style.color = 'green';
+  }
+
+  if (document.getElementById('speed').innerHTML >= 75 && document.getElementById('speed').innerHTML <= 79) {
+  document.getElementById('speed').style.color = '#FF8C00';
+  }
+
+   if (document.getElementById('speed').innerHTML  >= 80) {
+  document.getElementById('speed').style.color = 'red';
+  }
+
+}
+
+</script>
+
 </body>
-
-
-
 
 </html>

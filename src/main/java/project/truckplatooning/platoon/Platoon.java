@@ -4,7 +4,7 @@ package project.truckplatooning.platoon;
 public class Platoon  {
 
     public static Truck leadTruck = null;
-    public static Integer speed = 68;
+    public static Integer speed = 64;
 
     public void onStart() {
 
@@ -15,10 +15,10 @@ public class Platoon  {
 
     public static void accelerate() {
 
-        int accelerationValue = 3;
+        int accelerationValue = 4;
         int maxSpeed = 80;
 
-        if (speed >= maxSpeed) {
+        if (speed >= maxSpeed - 3) {
             return;
         }
 
@@ -27,9 +27,9 @@ public class Platoon  {
 
     public static void brake() {
 
-        int brakeValue = 3;
+        int brakeValue = 4;
 
-        if (speed <= 3) {
+        if (speed <= 0) {
             return;
         }
 
@@ -39,7 +39,6 @@ public class Platoon  {
     public static void stop() {
         Platoon.speed = 0;
     }
-
 
     public void onEnd(){
 

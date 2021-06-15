@@ -7,13 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.truckplatooning.TruckPlatooningApplication;
+import project.truckplatooning.communication.TruckNotificator;
 
 import java.util.Date;
 import java.util.UUID;
 
 
 @Controller
-public class TruckController {
+public class TruckController  {
 
     private final TruckService truckService;
 
@@ -27,16 +28,25 @@ public class TruckController {
     }
 
 
+    @GetMapping("/")
+    public String home(){
+
+        return "monitoring";
+    }
+
+
+
     @GetMapping("/start")
-    public String start(){
+    public String start(Model model){
 
         Platoon platoon = new Platoon();
         platoon.onStart();
 
-        return "started";
+        truckService.showLead(model);
+
+        return "monitoring";
 
     }
-
 
     @GetMapping("/monitor")
     public String showMonitor(Model model){
@@ -50,8 +60,6 @@ public class TruckController {
 
         Platoon.accelerate();
 
-
-        TruckService truckService = new TruckService();
         truckService.adjustSpeed();
 
         return showMonitor(model);
@@ -61,7 +69,8 @@ public class TruckController {
     public String getReducedSpeed(Model model){
 
         Platoon.brake();
-        showMonitor(model);
+
+        truckService.adjustSpeed();
 
         return showMonitor(model);
 
@@ -71,22 +80,27 @@ public class TruckController {
     public String getSpeed(Model model){
 
         Platoon.stop();
-        showMonitor(model);
+
+        truckService.adjustSpeed();
 
         return showMonitor(model);
 
     }
 
-    @PostMapping("/join/{truckId}")
-    public String addNewTruck(Model model){
+
+    @GetMapping("/join")
+    public String join(Model model){
+
 
         truckService.showMonitor(model);
 
-        return showMonitor(model);
+        return "monitoring";
+
+
     }
 
     @PostMapping("/leave/{truckId}")
-    public String removeTruck(Model model){
+    public String leave(Model model){
 
         showMonitor(model);
 

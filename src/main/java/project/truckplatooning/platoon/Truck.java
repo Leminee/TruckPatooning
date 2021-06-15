@@ -3,7 +3,7 @@ package project.truckplatooning.platoon;
 public class Truck {
 
     private Truck leadTruck = Platoon.leadTruck;
-    private static Integer truckProcessId = 0;
+    private Long truckProcessId = ProcessHandle.current().pid();
     private Long truckId;
     private Integer speed = Platoon.speed;
     private Truck truckInFront;
@@ -12,35 +12,16 @@ public class Truck {
 
 
     public Truck(){
-        Truck.truckProcessId++;
 
     }
 
-    public Truck(TruckRole role){
-        Truck.truckProcessId++;
-
-    }
-
-    public Truck(Truck leadTruck, Integer truckProcessId, Long truckId, Integer speed, TruckRole truckRole) {
+    public Truck(Truck leadTruck, Long truckId, Integer speed, Truck truckInFront, Truck truckBehind, TruckRole truckRole) {
         this.leadTruck = leadTruck;
-        this.truckProcessId = truckProcessId;
-        this.truckId = truckId;
-        this.speed = speed;
-        this.truckRole = truckRole;
-        Truck.truckProcessId = truckProcessId ++;
-    }
-
-
-
-    public Truck(Truck leadTruck, Integer truckProcessId, Long truckId, Integer speed, Truck truckInFront, Truck truckBehind, TruckRole truckRole) {
-        this.leadTruck = leadTruck;
-        this.truckProcessId = truckProcessId;
         this.truckId = truckId;
         this.speed = speed;
         this.truckInFront = truckInFront;
         this.truckBehind = truckBehind;
         this.truckRole = truckRole;
-        Truck.truckProcessId = truckProcessId ++;
     }
 
     public void joinPlatoon(Truck truck) {
@@ -73,7 +54,7 @@ public class Truck {
     public Long getLeadTruck(){
         return leadTruck.truckId;
     }
-    public Integer getTruckProcessId() {
+    public Long getTruckProcessId() {
         return truckProcessId;
     }
     public TruckRole getTruckRole() {

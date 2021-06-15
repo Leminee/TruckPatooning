@@ -1,4 +1,4 @@
-package project.truckplatooning.platoon;
+package project.truckplatooning.communication;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
