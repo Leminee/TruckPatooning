@@ -9,10 +9,10 @@
     <title>Truck Platooning</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <style>
 
+    <style>
     body {
-    margin: 1;
+    margin:1
     padding: 1;
     background-color: #bcc0c4;
 
@@ -24,7 +24,8 @@
     }
 
     fieldset {
-    margin-right: 70%;
+    margin-right: 35%;
+    margin-left: 35%;
     text-align:center;
 
     }
@@ -40,8 +41,6 @@
 
    table, th, td {
    border: 1px solid black;
-   margin-left: 600px;
-   margin-top: -20%;
    height: 60px;
 
    }
@@ -50,114 +49,109 @@
     color: green;
    }
 
+   footer{
 
+    margin-top: 8%;
+
+   }
     </style>
-
 
 </head>
 
 <body>
 
-
 <header>
-
     <p th:text="''"/>
-
 </header>
 
 <main>
 
+<center>
+    <table style="width:65%">
+        <thead>
+        <tr>
+            <th>truckId</th>
+            <th>truckProcessId</th>
+            <th>leadTruck</th>
+            <th>truckInFront</th>
+            <th>truckBehind</th>
+            <th>speed</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="truck:${truck}">
+            <td th:text="${truck.truckId}"></td>
+            <td th:text="${truck.truckProcessId}"></td>
+            <td id="lead-truck" th:text="${truck.leadTruck}"></td>
+            <td th:text="${truck.truckInFront}"></td>
+            <td th:text="${truck.truckBehind}"></td>
+            <td th:text="${truck.speed}"></td>
+
+        </tr>
+        </tbody>
+
+    </table>
+</center>
+
+
+</br>
+</br>
+
 
     <fieldset>
-    <div class="start">
-        <legend><h2>Driver</h2></legend>
+        <div class="start">
+            <legend><h2>Driver</h2></legend>
 
-        <button >start program</button>
+            <button>start program</button>
 
-        <button onclick="location.href = 'http://localhost:8080/end'">exit program</button>
+            <button onclick="location.href = 'http://localhost:8080/end'">exit program</button>
 
-    </div>
+        </div>
 
     </fieldset>
 
     <fieldset>
-    <div class="lead">
-        <legend><h2>Master</h2></legend>
 
-        <button onclick="location.href = 'http://localhost:8080/speedplus'">accelerate</button>
-        <button onclick="location.href = 'http://localhost:8080/speedminus'">brake</button>
-        <button onclick="location.href = 'http://localhost:8080/stop'">stop</button>
 
-    </div>
+        <div class="lead">
+            <legend><h2>Master</h2></legend>
+
+            <button onclick="location.href = 'http://localhost:8080/speedplus'">accelerate</button>
+            <button onclick="location.href = 'http://localhost:8080/speedminus'">brake</button>
+            <button onclick="location.href = 'http://localhost:8080/stop'">stop</button>
+
+        </div>
     </fieldset>
 
 
     <fieldset>
-    <div class="trucks">
+        <div class="trucks">
 
-        <legend><h2>Truck</h2></legend>
+            <legend><h2>Truck</h2></legend>
 
-        <input placeholder="ID or PID ">
-        <button onclick="location.href = 'http://localhost:8080/join'">join Platoon</button>
-        </br>
-        <input placeholder="ID or PID">
-        <button>leave Platoon</button>
+            <input placeholder="ID or PID">
+            <button onclick="location.href ='http://localhost:8080/join'">join Platoon</button>
+            </br>
+            <input placeholder="ID or PID ">
+            <button>leave Platoon</button>
 
 
-    </div>
+        </div>
     </fieldset>
-
-        <table style="width:65%">
-            <thead>
-            <tr>
-                <th>truckId</th>
-                <th>truckProcessId</th>
-                <th>leadTruck</th>
-                <th>truckInFront</th>
-                <th>truckBehind</th>
-                <th>speed</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-            <tr th:each="truck:${truck}">
-                <td th:text="${truck.truckId}"></td>
-                <td th:text="${truck.truckProcessId}"></td>
-                <td id="lead-truck" th:text="${truck.leadTruck}"></td>
-                <td th:text="${truck.truckInFront}"></td>
-                <td th:text="${truck.truckBehind}"></td>
-                <td th:text="${truck.speed}"></td>
-
-            </tr>
-            </tbody>
-
-         </table>
-
-    <h3>--> onStart()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 </marquee>
-    <h3>--> joinPlatoon()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> 🚛  (platoonJoined)</marquee>
-    <h3>--> joinPlatoon()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> 🚛 <---> 🚛 (platoonJoined)</marquee>
-    <h3>--> leavePlatoon()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> <i>EMPTY</i> <---> 🚛 (platoonLeaved -> GapArose)</marquee>
-    <h3>--> closeGap() -> accelerate()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> 🚛 (speedIncreased -> GapClosed) </marquee>
-    <h3>--> brake() -> adjustSpeed()</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="1"> 🚚 <---> 🚛 speedReduced</marquee>
-    <h3>--> stop()</h3>
-    <p id="stop-method-called"> 🚚 🚛  stopped</p>
 
 </main>
 
 
+
 <footer>
-
-
+    <marquee behavior="scroll" direction="left" scrollamount="2"> 🚚 <---> 🚛 <---> 🚛 <---> 🚛 </marquee>
 </footer>
 
-
 </body>
+
+
+
 
 </html>
