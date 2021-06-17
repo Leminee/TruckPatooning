@@ -1,5 +1,8 @@
 package project.truckplatooning.platoon;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Truck {
 
     private Truck leadTruck = Platoon.leadTruck;
@@ -15,14 +18,6 @@ public class Truck {
 
     }
 
-    public Truck(Truck leadTruck, Long truckId, Integer speed, Truck truckInFront, Truck truckBehind, TruckRole truckRole) {
-        this.leadTruck = leadTruck;
-        this.truckId = truckId;
-        this.speed = speed;
-        this.truckInFront = truckInFront;
-        this.truckBehind = truckBehind;
-        this.truckRole = truckRole;
-    }
 
     public void joinPlatoon(Truck truck) {
 

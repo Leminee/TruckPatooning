@@ -1,6 +1,8 @@
 package project.truckplatooning.platoon;
 
 
+import project.truckplatooning.service.TruckService;
+
 public class Platoon  {
 
     public static Truck leadTruck = null;
@@ -13,7 +15,9 @@ public class Platoon  {
 
     }
 
+
     public static void accelerate() {
+
 
         int accelerationValue = 4;
         int maxSpeed = 80;

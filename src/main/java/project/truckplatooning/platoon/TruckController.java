@@ -1,86 +1,104 @@
 package project.truckplatooning.platoon;
 
-
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.truckplatooning.TruckPlatooningApplication;
-import project.truckplatooning.communication.TruckNotificator;
+import project.truckplatooning.service.TruckService;
 
-import java.util.Date;
-import java.util.UUID;
+import java.util.Collections;
+import java.util.List;
 
 
 @Controller
 public class TruckController  {
 
     private final TruckService truckService;
-
-    @Autowired
-    private RabbitTemplate template;
-
-
     @Autowired
     public TruckController(TruckService truckService) {
         this.truckService = truckService;
     }
 
 
-    @GetMapping("/")
-    public String home(){
+    @RequestMapping("/")
+    public String getHomePage(){
 
         return "monitoring";
     }
 
 
 
-    @GetMapping("/start")
-    public String start(Model model){
+    @RequestMapping("/start")
+    public String getStartedProgram(Model model){
 
-        Platoon platoon = new Platoon();
-        platoon.onStart();
+        startProgram();
 
-        truckService.showLead(model);
+        model.addAttribute("truck", Collections.singletonList(truckService.createLead()));
 
         return "monitoring";
-
     }
 
-    @GetMapping("/monitor")
+    @RequestMapping("/monitor")
     public String showMonitor(Model model){
 
-        return truckService.showMonitor(model);
+        List<Truck> truckList = truckService.createNewTruck();
+
+        model.addAttribute("truck", truckList);
+
+        return "monitoring";
 
     }
 
-   @GetMapping("/speedplus")
+    @RequestMapping("/join")
+    public String getStatusAfterJoining(Model model){
+
+        List<Truck> truckList = truckService.createNewTruck();
+
+        model.addAttribute("truck", truckList);
+
+        return "monitoring";
+    }
+
+    @PostMapping("/leave/{truckId}")
+    public void leavePlatoon(Model model){
+
+
+    }
+
+   @RequestMapping("/speedplus")
     public String getIncreasedSpeed(Model model){
 
         Platoon.accelerate();
 
+       System.out.println("LKW hat gebremst");
+       System.out.println("Aktuelle Geschwindigkeit: " + Platoon.speed);
+
         truckService.adjustSpeed();
 
         return showMonitor(model);
     }
 
-    @GetMapping("/speedminus")
+    @RequestMapping("/speedminus")
     public String getReducedSpeed(Model model){
 
         Platoon.brake();
 
+        System.out.println("LKW hat gebremst");
+        System.out.println("Aktuelle Geschwindigkeit: " + Platoon.speed);
+
         truckService.adjustSpeed();
 
         return showMonitor(model);
 
     }
 
-    @GetMapping("/stop")
-    public String getSpeed(Model model){
+    @RequestMapping("/stop")
+    public String getSpeedAfterStop(Model model){
+
+        System.out.println("LKW hat gestoppt");
+        System.out.println("Aktuelle Geschwindigkeit: " + Platoon.speed);
 
         Platoon.stop();
-
         truckService.adjustSpeed();
 
         return showMonitor(model);
@@ -88,46 +106,19 @@ public class TruckController  {
     }
 
 
-    @GetMapping("/join")
-    public String join(Model model){
+    public void startProgram() {
 
-
-        truckService.showMonitor(model);
-
-        return "monitoring";
-
-
+        Platoon platoon = new Platoon();
+        platoon.onStart();
     }
 
-    @PostMapping("/leave/{truckId}")
-    public String leave(Model model){
-
-        showMonitor(model);
-
-        return showMonitor(model);
-    }
-
-    @GetMapping("/end")
+    @RequestMapping("/end")
     public void close(){
         
         System.out.println("Programm wird beendet...");
         Platoon platoon = new Platoon();
         platoon.onEnd();
 
-    }
-
-
-
-    @GetMapping("/pub")
-    public String publishMessage(@RequestBody TruckNotificator message) {
-        message.setMessageId(UUID.randomUUID().toString());
-        message.setMessageDate(new Date());
-        template.convertAndSend(TruckPlatooningApplication.EXCHANGE,
-                TruckPlatooningApplication.ROUTING_KEY, message);
-
-        System.out.println("test");
-
-        return "Message Published";
     }
 
 }
