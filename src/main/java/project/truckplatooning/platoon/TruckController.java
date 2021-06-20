@@ -1,9 +1,11 @@
 package project.truckplatooning.platoon;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import project.truckplatooning.service.TruckService;
 
 import java.util.Collections;
@@ -14,10 +16,18 @@ import java.util.List;
 public class TruckController  {
 
     private final TruckService truckService;
+
+
     @Autowired
     public TruckController(TruckService truckService) {
         this.truckService = truckService;
     }
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    /*@Autowired
+    private WebClient.Builder webClientBuilder;*/
 
 
     @RequestMapping("/")

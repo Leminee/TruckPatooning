@@ -2,19 +2,26 @@ package project.truckplatooning.platoon;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
+import java.util.UUID;
+
 @Component
 public class Truck {
 
     private Truck leadTruck = Platoon.leadTruck;
     private Long truckProcessId = ProcessHandle.current().pid();
-    private Long truckId;
+    private Integer truckId;
     private Integer speed = Platoon.speed;
     private Truck truckInFront;
     private Truck truckBehind;
     private TruckRole truckRole;
+    private Integer port;
 
 
     public Truck(){
+        Random random = new Random();
+        Integer randomId = random.nextInt(999999999);
+        this.truckId = randomId;
 
     }
 
@@ -34,7 +41,7 @@ public class Truck {
 
     }
 
-    public Long getTruckId() {
+    public Integer getTruckId() {
         return truckId;
     }
     public Truck getTruckInFront() {
@@ -46,7 +53,7 @@ public class Truck {
     public Integer getSpeed() {
         return speed;
     }
-    public Long getLeadTruck(){
+    public Integer getLeadTruck(){
         return leadTruck.truckId;
     }
     public Long getTruckProcessId() {
@@ -63,7 +70,7 @@ public class Truck {
     public void setTruckInFront(Truck truckInFront) {
         this.truckInFront = truckInFront;
     }
-    public void setTruckId(Long truckId) {
+    public void setTruckId(Integer truckId) {
         this.truckId = truckId;
     }
     public void setTruckBehind(Truck truckBehind) {
@@ -75,6 +82,10 @@ public class Truck {
 
     public void setTruckRole(TruckRole truckRole) {
         this.truckRole = truckRole;
+    }
+
+    public void setTruckProcessId(Long truckProcessId) {
+        this.truckProcessId = truckProcessId;
     }
 
     @Override

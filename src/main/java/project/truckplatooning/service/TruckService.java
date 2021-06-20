@@ -14,7 +14,6 @@ public class TruckService {
 
     public Truck createLead() {
 
-        leadTruck.setTruckId(66666666L);
         leadTruck.setLeadTruck(Platoon.leadTruck);
         leadTruck.setSpeed(Platoon.speed);
         leadTruck.setTruckRole(TruckRole.LEAD);
@@ -31,7 +30,6 @@ public class TruckService {
         leadTruck.joinPlatoon(truck1);
         leadTruck.setSpeed(Platoon.speed);
 
-        truck1.setTruckId(434554L);
         truck1.setLeadTruck(leadTruck);
         truck1.setSpeed(Platoon.speed);
         truck1.setTruckRole(TruckRole.FOLLOW);

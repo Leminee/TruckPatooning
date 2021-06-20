@@ -7,14 +7,22 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 @SpringBootApplication
+@EnableEurekaClient
+@EnableDiscoveryClient
 public class TruckPlatooningApplication {
 
 	public static Logger logger = LoggerFactory.getLogger(TruckPlatooningApplication.class);
@@ -52,16 +60,27 @@ public class TruckPlatooningApplication {
 	}
 
 
+	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate(){
+		return  new RestTemplate();
+	}
+
+	@Autowired
+	static Environment environment;
+
+
+
 	public static void main(String[] args) throws IOException {
 
 		Scanner sc = new Scanner(System.in);
 		SpringApplication.run(TruckPlatooningApplication.class, args);
-
 		System.out.println("PID: " + ProcessHandle.current().pid());
-
 		String processToKill = sc.nextLine();
 		String cmd = "kill -9 " + processToKill;
 		Runtime.getRuntime().exec(cmd);
+
+
 	}
 
 
