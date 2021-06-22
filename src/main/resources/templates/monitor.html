@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TruckPlatooning</title>
+
+    <title>Monitor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+
+    <style>
+
+
+      body {
+        margin:1
+        padding: 1;
+        background-color: #bcc0c4;
+
+      }
+
+      button {
+        font-size: 20px;
+        border-radius: 5px;
+      }
+
+      fieldset {
+        margin-right: 35%;
+        margin-left: 35%;
+        text-align:center;
+
+      }
+
+      #stop-method-called{
+        text-align:center;
+
+      }
+
+      #monitoring {
+        text-align:center;
+      }
+
+      table, th, td {
+        border: 1px solid black;
+        height: 60px;
+
+      }
+
+      td{
+        text-align: center;
+      }
+
+      #lead-truck {
+        color: green;
+      }
+
+      #speed {
+        font-size: 30px;
+      }
+
+      #truck-id {
+        font-size: 20px;
+      }
+
+      footer{
+
+        margin-top: 8%;
+
+      }
+    </style>
+
+  </head>
+
+
+<body onload="changeSpeedColor()">
+
+<header>
+  <p th:text="''"/>
+</header>
+
+<br>
+<br>
+<br>
+<br>
+<main>
+
+  <center>
+    <table style="width:65%">
+      <thead>
+      <tr>
+        <th>Truck ID</th>
+        <th>Lead ID</th>
+        <th>Front Truck ID</th>
+        <th>Back Truck ID</th>
+        <th>speed</th>
+        <th>Truck Role</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr th:each="truck:${truck}">
+        <td id="truck-id" th:text="${truck.truckId}"></td>
+        <td id="lead-truck" th:text="${truck.leadTruckId}"></td>
+        <td id="truck-front" th:text="${truck.truckInFrontId}"></td>
+        <td th:text="${truck.truckBehindId}"></td>
+
+        <td id="speed" th:text="${truck.speed}"></td>
+        <td id="truck-role" th:text="${truck.truckRole}"></td>
+
+      </tr>
+      </tbody>
+
+    </table>
+  </center>
+
+
+  </br>
+  </br>
+
+
+
+
+
+<center>
+  <button onclick="location.href ='http://localhost:9090/monitor'">refresh status</button>
+</center>
+</main>
+
+
+
+
+
+<footer>
+  <marquee behavior="scroll" direction="left" scrollamount="2"> 🚛 <---> 🚚 <---> 🚚 </marquee>
+</footer>
+
+
+
+<script type="text/javascript">
+
+  changeSpeedColor = function() {
+
+    if (document.getElementById('truck-role').innerHTML == 'LEAD') {
+      document.getElementById('truck-role').style.color = 'green';
+    }
+
+    if (document.getElementById('truck-id').innerHTML  == 66666666) {
+      document.getElementById('truck-id').style.color = 'green';
+    }
+
+
+    if (document.getElementById('speed').innerHTML >= 75 && document.getElementById('speed').innerHTML <= 79) {
+      document.getElementById('speed').style.color = '#FF8C00';
+    }
+
+    if (document.getElementById('speed').innerHTML  >= 80) {
+      document.getElementById('speed').style.color = 'red';
+    }
+
+
+  }
+
+</script>
+
+</body>
+</html>
