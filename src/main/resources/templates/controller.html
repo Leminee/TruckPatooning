@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Controller</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>TruckPlatooning</title>
+
+        <title>Truck Platooning</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+
+        <style>
+
+
+            body {
+                margin:1
+                padding: 1;
+                background-color: #bcc0c4;
+
+            }
+
+            button {
+                font-size: 20px;
+                border-radius: 5px;
+            }
+
+            fieldset {
+                margin-right: 35%;
+                margin-left: 35%;
+                text-align:center;
+
+            }
+
+        </style>
+
+    </head>
+
+
+<body>
+
+<header>
+    <p th:text="''"/>
+</header>
+
+<br>
+<br>
+<br>
+<br>
+
+<fieldset>
+
+
+    <div class="lead">
+        <legend><h2>Master</h2></legend>
+
+        <form action="/control/acc/" method="POST">
+            <label>
+                <input placeholder="value" name="acc-value">
+            </label>
+            <button type= "submit">accelerate</button>
+        </form>
+        <br>
+        <br>
+        <label>
+            <input placeholder="value" name="br-value">
+        </label>
+        <br>
+        <button onclick="location.href ='http://localhost:6060/control/brake/'">brake</button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button onclick="location.href ='http://localhost:6060/control/stop'">stop</button>
+
+    </div>
+</fieldset>
+
+
+
+
+
+</body>
+</html>
