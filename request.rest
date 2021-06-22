@@ -1,0 +1,4 @@
+GET http://localhost:8081/api/registration/position/0
+Accept: application/json
+
+###
