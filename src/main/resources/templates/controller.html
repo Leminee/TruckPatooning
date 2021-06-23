@@ -51,33 +51,40 @@
 
 <fieldset>
 
-
     <div class="lead">
         <legend><h2>Master</h2></legend>
 
-        <form action="/control/acc/" method="POST">
+        <form action="/acc" method="POST">
             <label>
-                <input placeholder="value" name="acc-value">
+                <input type="number" placeholder="value" name="acc-value" required>
             </label>
-            <button type= "submit">accelerate</button>
+            <button type="submit">accelerate</button>
         </form>
+
+
         <br>
         <br>
+
+        <form action="/brake" method="POST">
         <label>
-            <input placeholder="value" name="br-value">
+            <input type="number" placeholder="value" name="br-value" required>
         </label>
         <br>
-        <button onclick="location.href ='http://localhost:6060/control/brake/'">brake</button>
+        <button type="submit">brake</button>
+        </form>
+
         <br>
         <br>
         <br>
         <br>
-        <button onclick="location.href ='http://localhost:6060/control/stop'">stop</button>
+
+
+        <form action="/stop" method="POST">
+        <button type="submit">stop</button>
+        </form>
 
     </div>
 </fieldset>
-
-
 
 
 

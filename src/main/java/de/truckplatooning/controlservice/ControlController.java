@@ -34,4 +34,8 @@ public class ControlController {
 
         restTemplate.put(BASE_URL + "stop", Truck.class);
     }
+
+
+    //methode wird an rabbitmq geschickt
+    //regisserver liest die geschickte Nachricht
 }
