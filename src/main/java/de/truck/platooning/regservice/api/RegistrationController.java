@@ -2,6 +2,7 @@ package de.truck.platooning.regservice.api;
 
 import de.truck.platooning.regservice.service.TruckService;
 import de.truck.platooning.regservice.domain.Truck;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,16 +22,20 @@ public class RegistrationController {
 
 
     @PostMapping(path ="/add")
+    @ResponseStatus(HttpStatus.CREATED)
     public void add(Truck truck){
 
         truckService.addTruck(truck);
     }
 
+
     @PostMapping(path ="/add/{position}")
+    @ResponseStatus(HttpStatus.CREATED)
     public void addIn(@PathVariable int position, Truck truck){
 
         truckService.addTruckPosition(position, truck);
     }
+
 
     @PutMapping(path ="/acc/{value}")
     public void increaseSpeed(@PathVariable int value){

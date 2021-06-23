@@ -46,7 +46,6 @@ public class TruckService {
    public void addTruckPosition(int position, Truck truck) {
 
 
-
       if (platoon.size() <= position) {
          System.err.println("Du kannst an dieser Position keinen Truck hinzufügen");
          return;
@@ -148,6 +147,7 @@ public class TruckService {
 
 
    public void adjustSpeed() {
+
 
 
    }
